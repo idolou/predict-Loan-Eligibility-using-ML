@@ -14,7 +14,6 @@ from sklearn.metrics import classification_report
 
 ###########################################################################
 #1. Load File
-print("\n########---Q1---########")
 Dataframe = pd.read_csv("train_Loan.csv")
 print("Dataframe Loaded.")
 print("__________________________________________")
@@ -33,7 +32,6 @@ cat_var = cat_var[1:]
 
 ###########################################################################
 #2. Frequency Distribution:
-print("\n########---Q2---########")
 def Values_Freq_Dist(dataframe, features, NumValue):
     """
     Parameters
@@ -55,14 +53,12 @@ Values_Freq_Dist(Dataframe, features, NumValue)
 
 ###########################################################################
 #3. Data Types:
-print("\n########---Q3---########")
 print('\nData Types:')
 print(Dataframe.dtypes)
 print("__________________________________________")
 
 ###########################################################################
 #4. Missing Values:
-print("\n########---Q4---########")
 for insertNumCat in cat_var:
     Dataframe[insertNumCat].fillna(stat.mode(Dataframe[insertNumCat]), inplace=True)
 
@@ -78,7 +74,6 @@ print("__________________________________________")
 
 ###########################################################################
 #5. Discretization:
-print("\n########---Q5---########")
 
 def binning(col, cut_points, labels=None):
     """
@@ -118,7 +113,6 @@ print("__________________________________________")
 
 ###########################################################################
 #6. Outlier Detection:
-print("\n########---Q6---########")
 # Keep only the ones that are within +3 to -3 standard deviations in the column 'LoanAmount'.
 print("\nRecords that are within +3 to -3 standard deviations in the column LoanAmount:")
 Dataframe = Dataframe[(np.abs(Dataframe.LoanAmount - Dataframe.LoanAmount.mean()) <= (3 * Dataframe.LoanAmount.std()))]
@@ -127,7 +121,6 @@ print("__________________________________________")
 
 ###########################################################################
 #7. Normalized_Income:
-print("\n########---Q7---########")
 square_root = lambda x: np.sqrt(x) * 0.5
 Dataframe['Normalized_Income'] = Dataframe['ApplicantIncome'].apply(square_root)
 print("\nNormalized_Income Applied:")
@@ -136,7 +129,6 @@ print("__________________________________________")
 
 ###########################################################################
 #8. Dummy Variable:
-print("\n########---Q8---########")
 education_df = pd.get_dummies(Dataframe['Education'])
 Dataframe = Dataframe.join(education_df)
 print("\nDummy Variable Graduate/Not Graduate was added:")
@@ -145,7 +137,6 @@ print("__________________________________________")
 
 ###########################################################################
 #9. Convert Categorial to Numerical
-print("\n########---Q9---########")
 le = LabelEncoder()
 for i in cat_var:
     Dataframe[i] = le.fit_transform(Dataframe[i])
@@ -155,15 +146,12 @@ print("__________________________________________")
 
 ###########################################################################
 #10. Export Dataframe To csv File (train_Loan_updated):
-print("\n########---Q10---########")
 Dataframe.to_csv('train_Loan_updated.csv', index=True)
 print("\ncsv File created. We have {0} columns & {1} rows in the new file".format(len(Dataframe.columns), len(Dataframe.index)))
 print("__________________________________________")
 
 ###########################################################################
 #11 + 12. Decision Tree Classifier to predict Loan_Status based on Accuracy and Cross Validation Score:
-print("\n########---Q11---########")
-
 # Generic function for making a classification model and accessing performance:
 def classification_model(model, data, predictors, outcome):
     """
@@ -215,7 +203,6 @@ print("\nDecisionTreeClassifier fitted")
 print("__________________________________________")
 
 #12. Accuracy And Cross Validation Score:
-print("\n########---Q12---########")
 # Apply DecisionTreeClassifier On necessary features:
 print("\nDecisionTreeClassifier with All Variables:")
 all_col = Dataframe.columns.tolist()  #getting A list of all columns names
@@ -237,8 +224,6 @@ print("__________________________________________")
 
 ###########################################################################
 #13. Creating Decision Tree Graph using GraphViz Library:
-print("\n########---Q13---########")
-
 def visualize_tree(tree, features_names):
     """Create tree png using graphviz.
     Open the generate 'tree.dot' file in notepad and copy it's contents to http://webgraphviz.com/.Args
@@ -256,13 +241,11 @@ print("__________________________________________")
 
 ###########################################################################
 #14.
-print("\n########---Q14---########")
 print("\nSee Answer on Word File")
 print("__________________________________________")
 
 ###########################################################################
 #15.
-print("\n########---Q15---########")
 '''Logistic regression is the appropriate regression analysis to conduct when the dependent variable is dichotomous (binary).
     Like all regression analyses, the logistic regression is a predictive analysis.'''
 
